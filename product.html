@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Product Details</title>
+
+<style>
+body{
+font-family:Arial,sans-serif;
+background:#f5f6f8;
+padding:30px;
+}
+.product{
+max-width:800px;
+margin:auto;
+background:white;
+padding:20px;
+border-radius:10px;
+box-shadow:0 2px 10px rgba(0,0,0,.1);
+}
+img{
+width:100%;
+max-height:400px;
+object-fit:cover;
+border-radius:10px;
+}
+.price{
+color:green;
+font-size:24px;
+font-weight:bold;
+margin:10px 0;
+}
+button{
+padding:12px 20px;
+background:#2874f0;
+color:white;
+border:none;
+cursor:pointer;
+border-radius:5px;
+}
+</style>
+</head>
+<body>
+
+<div class="product">
+<img id="pimg">
+<h1 id="pname"></h1>
+<p class="price" id="pprice"></p>
+<p id="pdesc"></p>
+<button>Add to Cart</button>
+</div>
+
+<script>
+
+const products=[
+{
+id:1,
+name:"Summer Dress",
+price:"₹1799",
+img:"summer.jpg",
+desc:"Beautiful summer dress for women."
+},
+{
+id:2,
+name:"Denim Jacket",
+price:"₹2499",
+img:"denim.jpg",
+desc:"Premium denim jacket."
+},
+{
+id:3,
+name:"Sports Shoes",
+price:"₹2999",
+img:"https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=500",
+desc:"Comfortable sports shoes."
+},
+{
+id:4,
+name:"Designer Bag",
+price:"₹3299",
+img:"https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=500",
+desc:"Luxury designer handbag."
+}
+];
+
+const id=new URLSearchParams(location.search).get("id");
+const product=products.find(p=>p.id==id);
+
+document.getElementById("pimg").src=product.img;
+document.getElementById("pname").textContent=product.name;
+document.getElementById("pprice").textContent=product.price;
+document.getElementById("pdesc").textContent=product.desc;
+
+</script>
+
+</body>
+</html>

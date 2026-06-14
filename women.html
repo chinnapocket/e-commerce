@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Women Collection - Shrihya Fashion</title>
+
+<script src="https://kit.fontawesome.com/your-fontawesome-kit.js" crossorigin="anonymous"></script>
+
+<style>
+
+/* RESET */
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:Arial;
+}
+
+body{
+  background:#f5f6fa;
+}
+
+/* TOPBAR */
+.topbar{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:15px 20px;
+  background:#111;
+  color:white;
+}
+
+.brand{
+  font-weight:bold;
+  font-size:20px;
+}
+
+/* TITLE */
+.page-title{
+  text-align:center;
+  padding:20px;
+  background:white;
+}
+
+/* GRID */
+.product-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+  gap:20px;
+  padding:20px;
+}
+
+/* CARD */
+.product-card{
+  background:white;
+  border-radius:12px;
+  overflow:hidden;
+  box-shadow:0 5px 15px rgba(0,0,0,0.1);
+  transition:0.3s;
+}
+
+.product-card:hover{
+  transform:translateY(-5px);
+}
+
+.product-card img{
+  width:100%;
+  height:220px;
+  object-fit:cover;
+}
+
+.product-info{
+  padding:15px;
+}
+
+.price{
+  color:green;
+  font-weight:bold;
+}
+
+/* BUTTON */
+.add-btn{
+  width:100%;
+  padding:10px;
+  background:#111;
+  color:white;
+  border:none;
+  cursor:pointer;
+  margin-top:10px;
+}
+
+.add-btn:hover{
+  background:#e74c3c;
+}
+
+/* CART LINK */
+.cart{
+  color:white;
+  text-decoration:none;
+}
+
+.badge{
+  background:red;
+  padding:2px 7px;
+  border-radius:50%;
+  font-size:12px;
+}
+</style>
+
+</head>
+
+<body>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <div class="brand">Shrihya Fashion 👗</div>
+
+  <a href="cart.html" class="cart">
+    🛒 Cart <span id="cartCount" class="badge">0</span>
+  </a>
+</div>
+
+<!-- TITLE -->
+<div class="page-title">
+  <h1>Women's Collection</h1>
+  <p>Elegant styles for every occasion</p>
+</div>
+
+<!-- PRODUCTS -->
+<div class="product-grid">
+
+  <!-- 1 -->
+  <div class="product-card">
+    <img src="elegant.jpg">
+    <div class="product-info">
+      <h3>Elegant Dress</h3>
+      <p class="price">₹1799</p>
+      <button class="add-btn" data-id="1" data-name="Elegant Dress" data-price="1799" data-image="https://images.unsplash.com/photo-1591047139829-d91aecb6ca6d?w=500">Add to Cart</button>
+    </div>
+  </div>
+
+  <!-- 2 -->
+  <div class="product-card">
+    <img src="high waist.jpg">
+    <div class="product-info">
+      <h3>High Waist Jeans</h3>
+      <p class="price">₹1899</p>
+      <button class="add-btn" data-id="2" data-name="High Waist Jeans" data-price="1899" data-image="https://images.unsplash.com/photo-1549438818-434647f519f1?w=500">Add to Cart</button>
+    </div>
+  </div>
+
+  <!-- 3 -->
+  <div class="product-card">
+    <img src="handbag.jpg">
+    <div class="product-info">
+      <h3>Designer Handbag</h3>
+      <p class="price">₹3299</p>
+      <button class="add-btn" data-id="3" data-name="Designer Handbag" data-price="3299" data-image="https://images.unsplash.com/photo-1551163943-3f6a2b734639?w=500">Add to Cart</button>
+    </div>
+  </div>
+
+  <!-- 4 -->
+  <div class="product-card">
+    <img src="blazertop.jpg">
+    <div class="product-info">
+      <h3>Blazer Top</h3>
+      <p class="price">₹1499</p>
+      <button class="add-btn" data-id="4" data-name="Blazer Top" data-price="1499" data-image="https://images.unsplash.com/photo-1589465885857-526e0ff71b58?w=500">Add to Cart</button>
+    </div>
+  </div>
+
+  <!-- EXTRA PRODUCTS ADDED -->
+  <div class="product-card">
+    <img src="causal.jpg">
+    <div class="product-info">
+      <h3>Casual Top</h3>
+      <p class="price">₹999</p>
+      <button class="add-btn" data-id="5" data-name="Casual Top" data-price="999" data-image="https://images.unsplash.com/photo-1520975954732-35dd22299614?w=500">Add to Cart</button>
+    </div>
+  </div>
+
+  <div class="product-card">
+    <img src="party.jpg">
+    <div class="product-info">
+      <h3>Party Dress</h3>
+      <p class="price">₹2599</p>
+      <button class="add-btn" data-id="6" data-name="Party Dress" data-price="2599" data-image="https://images.unsplash.com/photo-1520975867597-0f4f0d2e3d3b?w=500">Add to Cart</button>
+    </div>
+  </div>
+
+</div>
+
+<script>
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+/* UPDATE CART COUNT */
+function updateCartCount(){
+  document.getElementById("cartCount").textContent =
+  cart.reduce((s,i)=>s+i.quantity,0);
+}
+
+/* ADD TO CART */
+document.querySelectorAll(".add-btn").forEach(btn=>{
+  btn.addEventListener("click",()=>{
+
+    const product = {
+      id: btn.dataset.id,
+      name: btn.dataset.name,
+      price: Number(btn.dataset.price),
+      image: btn.dataset.image,
+      quantity: 1
+    };
+
+    let existing = cart.find(i=>i.id===product.id);
+
+    if(existing){
+      existing.quantity++;
+    }else{
+      cart.push(product);
+    }
+
+    localStorage.setItem("cart",JSON.stringify(cart));
+    updateCartCount();
+
+    alert("Added to cart ✅");
+  });
+});
+
+updateCartCount();
+</script>
+
+</body>
+</html>
